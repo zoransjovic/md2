@@ -1,6 +1,7 @@
 const Point = require("./models/point");
-const Rectangle = require("./models/rectangle");
-const Romb = require("./models/romb");
+// const Rectangle = require("./models/rectangle");
+// const Romb = require("./models/romb");
+const Shape = require("./models/shape");
 
 /**
  * Draw service to create canvas
@@ -16,7 +17,8 @@ class DrawService {
     const e = new Point(220, 200);
     const points = [a, b, c, d, e];
 
-    const r = new Rectangle(points);
+    // const r = new Rectangle(points);
+    const r = new Shape(points);
     const canvas = r.draw();
 
     return canvas;
@@ -30,7 +32,8 @@ class DrawService {
     const e = new Point(400, 200);
     const points = [a, b, c, d, e];
 
-    const r = new Romb(points);
+    // const r = new Romb(points);
+    const r = new Shape(points);
     const canvas = r.draw();
 
     return canvas;

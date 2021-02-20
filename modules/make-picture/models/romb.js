@@ -1,3 +1,4 @@
+const Line = require("./line");
 const Shape = require("./shape");
 
 /**
@@ -13,7 +14,11 @@ class Romb extends Shape {
       j,
       dx = 10,
       dy,
-      charToDisplay = "*",
+      line,
+      lineLength,
+      numOfInterpolation;
+
+    const charToDisplay = "*",
       ctx = this.context;
 
     ctx.beginPath();
@@ -24,7 +29,18 @@ class Romb extends Shape {
       // ctx.lineTo(this.points[i].x, this.points[i].y);
       ctx.fillText(charToDisplay, this.points[i - 1].x, this.points[i - 1].y);
 
-      for (j = 1; j < 5; j++) {
+      // Get Line length
+      line = new Line(this.points[i-1], this.points[i]);
+      lineLength = line.length();
+
+      // Calculate 'y' increment
+      dy =
+        (dx * Math.abs(this.points[i].y - this.points[i - 1].y)) /
+        Math.abs(this.points[i].x - this.points[i - 1].x);
+
+      numOfInterpolation = lineLength / this.getIncrement(dx, dy);
+
+      for (j = 1; j < numOfInterpolation; j++) {
         dy =
           (j * dx * Math.abs(this.points[i].y - this.points[i - 1].y)) /
           Math.abs(this.points[i].x - this.points[i - 1].x);

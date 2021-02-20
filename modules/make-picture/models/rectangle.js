@@ -1,3 +1,4 @@
+const Line = require("./line");
 const Shape = require("./shape");
 
 /**
@@ -12,7 +13,11 @@ class Rectangle extends Shape {
     let i,
       j,
       dx = 24,
-      charToDisplay = "*",
+      line,
+      lineLength,
+      numOfInterpolation;
+
+    const charToDisplay = "*",
       ctx = this.context;
 
     ctx.beginPath();
@@ -22,7 +27,13 @@ class Rectangle extends Shape {
     for (i = 1; i < this.points.length; i++) {
       ctx.fillText(charToDisplay, this.points[i - 1].x, this.points[i - 1].y);
 
-      for (j = 1; j < 11; j++) {
+      // Get Line length
+      line = new Line(this.points[i-1], this.points[i]);
+      lineLength = line.length();
+
+      numOfInterpolation = lineLength / dx;
+
+      for (j = 1; j < numOfInterpolation; j++) {
         if (
           this.points[i].y === this.points[i - 1].y &&
           this.points[i].x > this.points[i - 1].x
